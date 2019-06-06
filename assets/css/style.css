@@ -1,9 +1,10 @@
+@import url(./../Game\ of\ Thrones.ttf);
 body{
     height:100vh;
     background-image: url(./../images/gameContentB.jpg);
     background-size: cover; 
     background-repeat: no-repeat;
-    
+    font-family: "Game of Thrones";
 }
 
 #titleBlock{
