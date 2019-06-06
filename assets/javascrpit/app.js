@@ -106,6 +106,7 @@ document.getElementById("startDiv").addEventListener("click", function () {
 
 //TIMER FUNCTION
 function timer() {
+    
     clearInterval(intervalID);
     intervalID = setInterval(decrement, 1000);
 }
@@ -121,7 +122,7 @@ function decrement() {
 function loss() {
     document.getElementById("gameContent").innerHTML ="";
     var lossScreen = document.createElement("div");
-    lossScreen.textContent = "Incorrect, the right answer to " + objArray[questionCounter].question + " is " + objArray[questionCounter].rightAnswer;
+    lossScreen.textContent = "Incorrect, the right answer to: " + objArray[questionCounter].question + " is " + objArray[questionCounter].rightAnswer + ".";
     lossScreen.setAttribute("class","winLossScreen")
     document.getElementById("gameContent").append(lossScreen);
     questionCounter++;
@@ -134,7 +135,7 @@ function loss() {
 function win() {
     document.getElementById("gameContent").innerHTML="";
     var winScreen = document.createElement("div");
-    winScreen.textContent = "Correct! The answer to " + objArray[questionCounter].question + " is " + objArray[questionCounter].rightAnswer;
+    winScreen.textContent = "Correct! The answer to: " + objArray[questionCounter].question + " is " + objArray[questionCounter].rightAnswer +".";
     winScreen.setAttribute("class","winLossScreen")
     document.getElementById("gameContent").append(winScreen);
     questionCounter++;
@@ -150,6 +151,7 @@ function win() {
 //Puts the questions out on the screen
 function question(array, counter) {
     //Clears div
+    
     document.getElementById("gameContent").innerHTML="";
     //Finishes the game
   
@@ -160,12 +162,17 @@ function question(array, counter) {
     }
     else{
     questionTime=30;
+    
+    
+
     timer();
-    //Need to add clicker events to all of these
+    
     var currentQuestion = document.createElement("div");
     currentQuestion.textContent = array[counter].question;
     currentQuestion.setAttribute("class", "currentQuestion");
     document.getElementById("gameContent").appendChild(currentQuestion);
+    
+    
 
 
     var answer1 = document.createElement("div");
