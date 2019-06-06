@@ -6,17 +6,15 @@ var question1 = {
     ans1: "Snow",
     ans2: "Rivers",
     ans3: "Sand",       
-    ans4: "Mountain",
-    aArray: ["Snow","Rivers","Sand","Mountain",]
+    ans4: "Mountain"
 };
 var question2 = {
-    question: "/'The Mountain/' is the nickname for which character?",
+    question: "'The Mountain' is the nickname for which character?",
     rightAnswer:"Gregor Clegane",
     ans1: "Oberyn Martell",
     ans2: "Sandor Clegane",
     ans3: "Joffrey Baratheon",  
-    ans4: "Gregor Clegane",
-    aArray: ["Gregor Clegane","Oberyn Martell","Sandor Clegane","Joffrey Baratheon"]
+    ans4: "Gregor Clegane"
 };
 var question3 = {
     question: "Who was the head of the Kings Guard at the beggining of Game of Thrones?",
@@ -24,8 +22,7 @@ var question3 = {
     ans1: "Ser Jamie Lannister",
     ans2: "Ser Barristan Selmy",
     ans3:"Lord Eddard Stark",     
-    ans4: "Bran the Broken",
-    aArray: ["Bran the Broken","Lord Eddard Stark","Ser Barristan Selmy","Ser Jamie Lannister"]
+    ans4: "Bran the Broken"
 };
 
 var question4 = {
@@ -34,8 +31,7 @@ var question4 = {
     ans1:"Renly Baratheon", 
     ans2: "Stannis Baratheon",
     ans3: "Tommen Baratheon",    
-    ans4:"Joffrey Baratheon", 
-    aArray:["Joffrey Baratheon","Renly Baratheon","Stannis Baratheon","Tommen Baratheon"]
+    ans4:"Joffrey Baratheon"
 };
 var question5 = {
     question: "Who is known as the /'The Kind Beyond the Wall/'?",
@@ -43,8 +39,8 @@ var question5 = {
     ans1: "The Night King",
     ans2:"Mance Rayder",
     ans3: "Tormund Giantsbane",   
-    ans4: "Jon Snow",
-    aArray: ["The Night King","Mance Rayder","Tormund Giantsbane","Jon Snow"]
+    ans4: "Jon Snow"
+
 };
 var question6 = {
     question: "How many times has Sansa Stark been married?",
@@ -52,8 +48,8 @@ var question6 = {
     ans1:"2",
     ans2: "0",
     ans3: "5",     
-    ans4: "1",
-    aArray: ["2","0","5","1"]
+    ans4: "1"
+
 };
 var question7 = {
     question: "Who was the Mad King's first born son?",
@@ -61,8 +57,8 @@ var question7 = {
     ans1:"Viserys Targaryen",
     ans2: "Agon Targaryen",
     ans3: "Aemon Targaryen",   
-    ans4: "Rhaegar Targaryen",
-    aArray: ["Viserys Targaryen","Agon Targaryen","Aemon Targaryen","Rhaegar Targaryen"]
+    ans4: "Rhaegar Targaryen"
+
       
  
 };
@@ -72,8 +68,7 @@ var question8 = {
     ans1: "Walder Frey",
     ans2: "Ramsey Bolton",
     ans3:"Roose Bolton",    
-    ans4:"Theon Grejoy",
-    aArray:["Roose Bolton","Walder Frey","Theon Grejoy","Ramsey Bolton"]
+    ans4:"Theon Grejoy"
 };
 var question9 = {
     question: "Which rival king tried to take King's Landing during the battle of the Blackwater?",
@@ -81,8 +76,8 @@ var question9 = {
     ans1: "Balon Greyjoy",
     ans2: "Stannis Baratheon",
     ans3:"Renly Baratheon",    
-    ans4:"Robb Stark",
-    aArray:["Stannis Baratheon","Renly Baratheon","Robb Stark","Balon Greyjoy"]
+    ans4:"Robb Stark"
+
     
 };
 var question10 = {
@@ -91,8 +86,8 @@ var question10 = {
     ans1:"Sunspear",
     ans2: "Gulltown",
     ans3: "Highgarden",      
-    ans4: "Oldtown",
-    aArray: ["Sunspear","Gulltown","Highgarden","Oldtown"]
+    ans4: "Oldtown"
+
 };
 //Variables
 var questionTime = 30;
@@ -104,16 +99,13 @@ var objArray = [question1, question2, question3, question4, question5, question6
 
 document.getElementById("startDiv").innerHTML = "Start!";
 document.getElementById("startDiv").addEventListener("click", function () {
+    document.getElementById("startDiv").outerHTML = "";
     question(objArray, questionCounter);
 });
 
 
-
+//TIMER FUNCTION
 function timer() {
-    
-    console.log("we here");
-    document.getElementById("startDiv").outerHTML = "";
-    
     clearInterval(intervalID);
     intervalID = setInterval(decrement, 1000);
 }
@@ -121,40 +113,52 @@ function decrement() {
     questionTime--;
 
     if (questionTime === 0) {
+        alert("Time's up!");
         loss();
     }
 
 }
 function loss() {
-    questionTime=7;
-    document.getElementById("gameContent").innerHTML("");
+    document.getElementById("gameContent").innerHTML ="";
     var lossScreen = document.createElement("div");
-    lossScreen.textContent = "Incorrect, the right answer to " + array[questionCounter].question + " is " + findCorrectAnswer(array[questionCounter]);
+    lossScreen.textContent = "Incorrect, the right answer to " + objArray[questionCounter].question + " is " + objArray[questionCounter].rightAnswer;
     lossScreen.setAttribute("class","winLossScreen")
+    document.getElementById("gameContent").append(lossScreen);
     questionCounter++;
-    question(objArray,questionCounter);
+    
+    setTimeout(function(){
+        question(objArray,questionCounter);
+    }, 5000);
 
 }
 function win() {
-    questionTime=7;
-    document.getElementById("gameContent").innerHTML("");
+    document.getElementById("gameContent").innerHTML="";
     var winScreen = document.createElement("div");
-    winScreen.textContent = "Correct! The answer to " + array[questionCounter].question + " is " + findCorrectAnswer(array[questionCounter]);
+    winScreen.textContent = "Correct! The answer to " + objArray[questionCounter].question + " is " + objArray[questionCounter].rightAnswer;
     winScreen.setAttribute("class","winLossScreen")
+    document.getElementById("gameContent").append(winScreen);
     questionCounter++;
     score++;
-    question(objArray,questionCounter);
+    setTimeout(function(){
+        question(objArray,questionCounter);
+
+    },5000)
 
 
 
 }
 //Puts the questions out on the screen
 function question(array, counter) {
+    //Clears div
+    document.getElementById("gameContent").innerHTML="";
     //Finishes the game
-    if(array.length ===counter){
-        finishingScreen();
-    }
+  
+    if(array.length ==counter){
 
+        finishingScreen();
+        
+    }
+    else{
     questionTime=30;
     timer();
     //Need to add clicker events to all of these
@@ -165,10 +169,10 @@ function question(array, counter) {
 
 
     var answer1 = document.createElement("div");
-    answer1.textContent = array[counter].ans1.answer;
+    answer1.textContent = array[counter].ans1;
     answer1.setAttribute("class", "answers");
     answer1.addEventListener("click", function(){
-        if(array[counter].ans1.correctAnswer){
+        if(array[counter].rightAnswer === array[counter].ans1){
             win();
         }
         else{
@@ -176,45 +180,66 @@ function question(array, counter) {
         }
 
     });
-    document.getElementById("gameContent").appendChild(answer1);
+    document.getElementById("gameContent").append(answer1);
 
     var answer2 = document.createElement("div");
-    answer2.textContent = array[counter].ans2.answer;
+    answer2.textContent = array[counter].ans2;
     answer2.setAttribute("class", "answers");
-    document.getElementById("gameContent").appendChild(answer2);
+    answer2.addEventListener("click", function(){
+        if(array[counter].rightAnswer === array[counter].ans2){
+            win();
+        }
+        else{
+            loss();
+        }
+
+    });
+    document.getElementById("gameContent").append(answer2);
 
     var answer3 = document.createElement("div");
-    answer3.textContent = array[counter].ans3.answer;
+    answer3.textContent = array[counter].ans3;
     answer3.setAttribute("class", "answers");
-    document.getElementById("gameContent").appendChild(answer3);
+    answer3.addEventListener("click", function(){
+        if(array[counter].rightAnswer === array[counter].ans3){
+            win();
+        }
+        else{
+            loss();
+        }
+
+    });
+    document.getElementById("gameContent").append(answer3);
 
     var answer4 = document.createElement("div");
-    answer4.textContent = array[counter].ans4.answer;
+    answer4.textContent = array[counter].ans4;
     answer4.setAttribute("class", "answers");
-    document.getElementById("gameContent").appendChild(answer4);
+    answer4.addEventListener("click", function(){
+        if(array[counter].rightAnswer === array[counter].ans4){
+            win();
+        }
+        else{
+            loss();
+        }
 
-
-
-
-    
+    });
+    document.getElementById("gameContent").append(answer4);
 
 }
-//Needs work lmao
-function findCorrectAnswer(obj){
-    
-        
-    
 }
+ 
+
 
 function finishingScreen(){
-    document.getElementById("gameContent").innerHTML("");
+    questionTime=-1000;
+    document.getElementById("gameContent").innerHTML= "";
     var finalScreen = document.createElement("div");
     finalScreen.textContent = "Score: " + score + "/10";
+    document.getElementById("gameContent").append(finalScreen);
 }
 
 
 
-
+    //Wanted to create answer divs using loop, but got lost...
     //Buggy for now
     // for (var key in array[counter]) {
     //     console.log(array[counter][key])
